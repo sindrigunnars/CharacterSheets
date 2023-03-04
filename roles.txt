@@ -1,0 +1,41 @@
+Nurse Person
+life 5-7
+strength 3-7
+intelligence 7-9
+/
+Reporter Person
+life 5-7
+strength 2-6
+intelligence 6-8
+/
+Professor Person
+life 4-6
+strength 1-5
+intelligence 8-10
+/
+Ghoul Creature
+life 4
+strength 4
+intelligence 2
+unnatural
+disquiet 6
+/
+Wolf Creature
+life 4
+strength 6
+intelligence 5
+natural
+disquiet 2
+/
+Chthonian Eldritch
+life 8
+strength 7
+intelligence 2
+traumatism 1
+/
+Shoggoth Eldritch
+life 8
+strength 9
+intelligence 6
+traumatism 2
+/
