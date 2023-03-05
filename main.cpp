@@ -24,7 +24,7 @@ int main() {
             cin >> input;
             roles.add_character(input);
         }else if (strcmp(input.c_str(), "4") == 0) {
-
+            roles.print_roster();
         }else if (strcmp(input.c_str(), "5") == 0) {
             roles.add_role();
         }else if (strcmp(input.c_str(), "6") == 0) {

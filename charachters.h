@@ -33,6 +33,7 @@ public:
         if (strcmp(attr.c_str(), "strength") == 0) this->strength = val;
         if (strcmp(attr.c_str(), "intelligence") == 0) this->intelligence = val;
     }
+    virtual void changeGender(string gender){};
 
     string getType() {return type;}
     string getRole() {return role;}
@@ -85,6 +86,10 @@ public:
         if (strcmp(attr.c_str(), "terror") == 0) this->terror = val;
         if (strcmp(attr.c_str(), "fear") == 0) this->fear = val;
     }
+
+    void changeGender(string gender) {
+        this->gender = gender;
+    }
 protected:
     int fear;
     string gender;
@@ -106,7 +111,7 @@ public:
     }
     void print() {
         Being::print();
-        cout << ", " << "disq: " <<  disquiet << ", " << "unnatural: " <<  (unnatural ? "true" : "false");
+        cout << ", " << "disq: " <<  disquiet << ", " <<  (unnatural ? "unnatural" : "natural");
     }
     void changeVal(string attr, int val){
         if (strcmp(attr.c_str(), "life") == 0) this->life = val;
@@ -192,6 +197,9 @@ public:
                 cout << "What is this persons name? ";
                 cin >> name;
                 characters[name] = new Person(roles[role], role);
+                cout << "What is this persons gender? ";
+                cin >> attr;
+                characters[name]->changeGender(attr);
                 break;
             case 1:
                 count = 0;
@@ -200,6 +208,15 @@ public:
                 }
                 name += role + to_string(count);
                 characters[name] = new Creature(roles[role], role);
+                cout << "Do you want to edit the name (y/n)? ";
+                cin >> attr;
+                if (strcmp(attr.c_str(), "y") == 0) {
+                    characters.erase(name);
+                    cout << "Please enter new name: ";
+                    cin >> name;
+                    characters.erase(name);
+                    characters[name] = new Creature(roles[role], role);
+                }
                 break;
             case 2:
                 count = 0;
@@ -285,6 +302,13 @@ public:
                     }
                 }
             }
+        }
+    }
+    void print_roster() {
+        for(const auto& elem : characters) {
+            cout << elem.first << ":\n\t";
+            elem.second->print();
+            cout << endl;
         }
     }
 private:

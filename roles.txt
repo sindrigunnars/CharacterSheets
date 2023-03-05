@@ -51,3 +51,10 @@ life 5
 strength 5
 intelligence 5
 /
+Hound Creature
+life 10
+strength 5
+intelligence 6
+natural
+disquiet 5
+/
