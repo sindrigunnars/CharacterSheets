@@ -39,3 +39,15 @@ strength 9
 intelligence 6
 traumatism 2
 /
+Hawk Creature
+life 5
+strength 5
+intelligence 5
+natural
+disquiet 5
+/
+Jane Person
+life 5
+strength 5
+intelligence 5
+/
