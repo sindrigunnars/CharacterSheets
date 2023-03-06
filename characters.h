@@ -19,6 +19,7 @@ public:
 
     virtual void changeVal(std::string attr, int val);
     virtual void changeGender(std::string gender);
+    virtual std::string get_string();
 
     std::string getType();
     std::string getRole();
@@ -37,7 +38,7 @@ class Person : public Being{
 public:
     Person();
     Person(map<std::string, std::string> init, std::string role);
-
+    std::string get_string();
     void print();
     void changeVal(std::string attr, int val);
     void changeGender(std::string gender);
@@ -51,6 +52,7 @@ class Creature : public Being{
 public:
     Creature();
     Creature(map<std::string, std::string> init, std::string role);
+    std::string get_string();
     void print();
     void changeVal(std::string attr, int val);
 protected:
@@ -63,6 +65,7 @@ public:
     EldrichHorror();
     EldrichHorror(map<std::string, std::string> init, std::string role);
     void print();
+    std::string get_string();
     void changeVal(std::string attr, int val);
 protected:
     int traumatism;
@@ -76,6 +79,7 @@ public:
     void print();
     void print_role_detailed(std::string name);
     void print_roster();
+    void print_roster_to_file();
     void deleteRole(std::string name);
 private:
     map<std::string, Being*> characters;

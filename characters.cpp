@@ -22,6 +22,14 @@ void Being::print(){
     cout << "life: " << life << ", " << "str: " << strength << ", " << "int: " << intelligence;
 }
 
+std::string Being::get_string() {
+    std::string ret;
+    ret += "\tLife: " + to_string(life);
+    ret += "\n\tStrength: " + to_string(strength);
+    ret += "\n\tIntelligence: " + to_string(intelligence);
+    return ret;
+}
+
 void Being::changeVal(std::string attr, int val) {
     if (strcmp(attr.c_str(), "life") == 0) this->life = val;
     if (strcmp(attr.c_str(), "strength") == 0) this->strength = val;
@@ -62,6 +70,15 @@ void Person::print() {
     Being::print();
     cout << ", " << "fear: " << fear << ", " << "gender: " << gender << ", " << "terr: " <<  terror;
 }
+
+std::string Person::get_string() {
+    std::string ret = Being::get_string();
+    ret += "\n\tFear: " + to_string(fear);
+    ret += "\n\tTerror: " + to_string(terror);
+    ret += "\n\tGender: " + gender;
+    return ret;
+}
+
 void Person::changeVal(std::string attr, int val){
     if (strcmp(attr.c_str(), "life") == 0) this->life = val;
     if (strcmp(attr.c_str(), "strength") == 0) this->strength = val;
@@ -89,6 +106,15 @@ void Creature::print() {
     Being::print();
     cout << ", " << "disq: " <<  disquiet << ", " <<  (unnatural ? "unnatural" : "natural");
 }
+
+std::string Creature::get_string() {
+    std::string ret = Being::get_string();
+    ret += "\n\tDisquiet: " + to_string(disquiet);
+    std::string genderstr = unnatural ? "unnatural" : "natural";
+    ret += "\n\tNature: " + genderstr;
+    return ret;
+}
+
 void Creature::changeVal(std::string attr, int val){
     if (strcmp(attr.c_str(), "life") == 0) this->life = val;
     if (strcmp(attr.c_str(), "strength") == 0) this->strength = val;
@@ -101,7 +127,7 @@ EldrichHorror::EldrichHorror() : Creature::Creature(){
     this->disquiet = 10; // Hard
     this->unnatural = true; // Hard
 }
-EldrichHorror::EldrichHorror(map<std::string, std::string> init, std::string role){
+EldrichHorror::EldrichHorror(map<std::string, std::string> init, std::string role) {
     this->life = get_num(init["life"]); // 0-10 Always specified
     this->strength = get_num(init["strength"]); // 0-10 Always specified
     this->intelligence = get_num(init["intelligence"]); // 0-10 Always specified
@@ -111,11 +137,20 @@ EldrichHorror::EldrichHorror(map<std::string, std::string> init, std::string rol
     this->role = role;
 
 }
+
 void EldrichHorror::print() {
     Creature::print();
     cout << ", " << "traumatism: " << traumatism;
     this->type = "eldritch";
 }
+
+std::string EldrichHorror::get_string() {
+    std::string ret = Being::get_string();
+    ret += "\n\tDisquiet: " + to_string(disquiet);
+    ret += "\n\tTraumatism: " + to_string(traumatism);
+    return ret;
+}
+
 void EldrichHorror::changeVal(std::string attr, int val){
     if (strcmp(attr.c_str(), "life") == 0) this->life = val;
     if (strcmp(attr.c_str(), "strength") == 0) this->strength = val;
@@ -158,15 +193,15 @@ void Roles::add_character(std::string role) {
     if (strcmp(roles[role]["type"].c_str(), "Creature") == 0) {choice = creature;}
     if (strcmp(roles[role]["type"].c_str(), "Eldritch") == 0) {choice = eldrich;}
     switch (choice) {
-        case 0:
-            cout << "What is this persons name? ";
+        case person:
+            cout << "What is this persons name(No spaces)? ";
             cin >> name;
             characters[name] = new Person(roles[role], role);
             cout << "What is this persons gender? ";
             cin >> attr;
             characters[name]->changeGender(attr);
             break;
-        case 1:
+        case creature:
             count = 0;
             for (const auto& elem : characters) {
                 if (strcmp(elem.second->getRole().c_str(), role.c_str()) == 0) count++;
@@ -183,7 +218,7 @@ void Roles::add_character(std::string role) {
                 characters[name] = new Creature(roles[role], role);
             }
             break;
-        case 2:
+        case eldrich:
             count = 0;
             for (const auto& elem : characters) {
                 if (strcmp(elem.second->getRole().c_str(), role.c_str()) == 0) count++;
@@ -197,13 +232,11 @@ void Roles::add_character(std::string role) {
     if (strcmp(attr.c_str(), "y") == 0) {
         int value;
         while (true) {
-            cout << name << ": \t";
-            characters[name]->print();
-            cout << endl;
-            cout << "Type the lower case attribute (press q to stop) ";
+            cout << name << ": \n" << characters[name]->get_string() << endl;
+            cout << "Type the lower case attribute (press q to stop, no spaces) ";
             cin >> attr;
             if (strcmp(attr.c_str(), "q") == 0) {break;}
-            cout << "What value do you want to assign? ";
+            cout << "What value do you want to assign (seperated by - if range, available range is 0-10)? ";
             cin >> value;
             characters[name]->changeVal(attr, value);
         }
@@ -293,8 +326,16 @@ void Roles::print_role_detailed(std::string name) {
 }
 void Roles::print_roster() {
     for(const auto& elem : characters) {
-        cout << elem.first << ":\n\t";
-        elem.second->print();
-        cout << endl;
+        cout << elem.first << " " << elem.second->getRole() << ":\n";
+        cout << elem.second->get_string() << endl;
     }
+}
+
+void Roles::print_roster_to_file() {
+    fstream fout("roster.txt", ios::out);
+    for(const auto& elem : characters) {
+        std::string printstr = elem.second->get_string();
+        fout << elem.first << " " << elem.second->getRole() << ":" << endl << printstr << endl;
+    }
+    fout.close();
 }

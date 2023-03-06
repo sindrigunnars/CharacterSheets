@@ -26,7 +26,13 @@ int main() {
             cin >> input;
             roles.add_character(input);
         }else if (strcmp(input.c_str(), "4") == 0) {
-            roles.print_roster();
+            cout << "1. Print to screen\n2. Print to file ";
+            cin >> input;
+            if (strcmp(input.c_str(), "1") == 0) {
+                roles.print_roster();
+            } else if (strcmp(input.c_str(), "2") == 0) {
+                roles.print_roster_to_file();
+            }
         }else if (strcmp(input.c_str(), "5") == 0) {
             roles.add_role();
         }else if (strcmp(input.c_str(), "6") == 0) {
