@@ -1,5 +1,6 @@
 #include <iostream>
 #include "characters.h"
+#include <cstring>
 #include <fstream>
 #include <map>
 using namespace std;

@@ -1,4 +1,6 @@
 #include "characters.h"
+#include <cstring>
+#include <chrono>
 #include <map>
 
 int main() {
