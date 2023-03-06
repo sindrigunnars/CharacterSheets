@@ -1,25 +1,25 @@
-Hawk0 Hawk:
-	Life: 5
-	Strength: 5
-	Intelligence: 5
-	Disquiet: 5
-	Nature: unnatural
-Hawk1 Hawk:
-	Life: 5
-	Strength: 5
-	Intelligence: 5
-	Disquiet: 5
-	Nature: unnatural
-Hawk2 Hawk:
-	Life: 5
-	Strength: 5
-	Intelligence: 5
-	Disquiet: 5
-	Nature: unnatural
-John Professor:
-	Life: 5
+Ghoul0 Ghoul:
+	Life: 4
 	Strength: 4
+	Intelligence: 2
+	Disquiet: 6
+	Nature: unnatural
+Ghoul1 Ghoul:
+	Life: 4
+	Strength: 4
+	Intelligence: 2
+	Disquiet: 6
+	Nature: unnatural
+Shoggoth0 Shoggoth:
+	Life: 8
+	Strength: 9
+	Intelligence: 6
+	Disquiet: 10
+	Traumatism: 2
+john Professor:
+	Life: 5
+	Strength: 2
 	Intelligence: 8
-	Fear: 1
-	Terror: 0
+	Fear: 5
+	Terror: 2
 	Gender: male

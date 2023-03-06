@@ -66,3 +66,19 @@ protected:
 };
 
 #include "roles.inl"
+
+// template <class T>
+// class Roles {
+// public:
+//     Roles();
+//     void add_character(std::string role);
+//     void add_role();
+//     void print();
+//     void print_role_detailed(std::string name);
+//     void print_roster();
+//     void print_roster_to_file();
+//     void deleteRole(std::string name);
+// private:
+//     map<std::string, T> characters;
+//     map<std::string, map<std::string, std::string> > roles;
+// };

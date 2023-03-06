@@ -41,5 +41,39 @@ int main() {
             roles.deleteRole(input);
         }
     } while(strcmp(input.c_str(), "q") != 0);
+
+
+    // roles.print();
+    // roles.print_role_detailed("Wolf");
+    // fstream fin("roles.txt");
+    // Characters chars;
+    // Choice choice;
+
+    // string primary, secondary, role, type;
+    // map<string, map<string, string> > roles;
+
+    // fin >> role >> type;
+    // while (fin >> primary) {
+    //     fin >> secondary;
+    //     if (strcmp(primary.c_str(), "/") == 0) {
+    //         if (strcmp(type.c_str(), "Person") == 0) {choice = person;}
+    //         if (strcmp(type.c_str(), "Creature") == 0) {choice = creature;}
+    //         if (strcmp(type.c_str(), "Eldritch") == 0) {choice = eldrich;}
+    //         chars.add_character(choice, roles[role], role);
+    //         primary = secondary;
+    //         fin >> secondary;
+    //         role = primary;
+    //         type = secondary;
+    //     } else if(strcmp(primary.c_str(), "unnatural") == 0 || strcmp(primary.c_str(), "natural") == 0) {
+    //         roles[role]["nature"] = primary;
+    //         primary = secondary;
+    //         fin >> secondary;
+    //         roles[role][primary] = secondary;
+    //     } else {
+    //         roles[role][primary] = secondary;
+    //     }
+    // }
+    // fin.close();
+    
     return 0;
 }
