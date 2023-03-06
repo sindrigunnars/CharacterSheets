@@ -309,7 +309,7 @@ void Roles::deleteRole(std::string name) {
 
 void Roles::print() {
     for(const auto& elem : roles){
-            cout <<  "\t" << elem.first << endl;
+            cout <<  "\t" << elem.first << " - " << elem.second.at("type") << endl;
     }
 }
 void Roles::print_role_detailed(std::string name) {
