@@ -250,21 +250,21 @@ public:
         fstream fout("roles.txt", ios::app);
         string name, type, value, write;
         map<string, string> new_role;
-        cout << "What is the name of the role (capitalized)? ";
+        cout << "What is the name of the role (capitalized, no spaces)? ";
         cin >> name;
         cout << "What is the type (capitalized (Person/Creature/Eldritch))? ";
         cin >> type;
         new_role["type"] = type;
-        write += "\n" + name + " " + type;
-        cout << "What is the life value (seperated by - if range)? ";
+        write += name + " " + type;
+        cout << "What is the life value (seperated by - if range, available range is 0-10)? ";
         cin >> value;
         new_role["life"] = value;
         write += "\nlife " + value;
-        cout << "What is the strength value (seperated by - if range)? ";
+        cout << "What is the strength value (seperated by - if range, available range is 0-10)? ";
         cin >> value;
         new_role["strength"] = value;
         write += "\nstrength " + value;
-        cout << "What is the intelligence value (seperated by - if range)? ";
+        cout << "What is the intelligence value (seperated by - if range, available range is 0-10)? ";
         cin >> value;
         new_role["intelligence"] = value;
         write += "\nintelligence " + value;
@@ -273,19 +273,42 @@ public:
             cin >> value;
             new_role["nature"] = value;
             write += "\n" + value;
-            cout << "What is the disquiet value (seperated by - if range)? ";
+            cout << "What is the disquiet value (seperated by - if range, available range is 0-10)? ";
             cin >> value;
             new_role["disquiet"] = value;
             write += "\ndisquiet " + value;
         }
         if (strcmp(type.c_str(), "Eldritch") == 0) {
-            cout << "What is the traumatism value (seperated by - if range)? ";
+            cout << "What is the traumatism value (seperated by - if range, available range is 0-10)? ";
             cin >> value;
             new_role["traumatism"] = value;
             write += "\traumatism " + value;
         }
         roles[name] = new_role;
-        fout << write << "\n/";
+        fout << write << "\n/\n";
+    }
+
+    void deleteRole(string name) {
+        fstream temp("temp.txt", ios::out), fin("roles.txt");
+        string line, role;
+        while (getline(fin, line)) {
+            role = line.substr(0, line.find(' '));
+            if (strcmp(role.c_str(), name.c_str()) == 0) {
+                while (strcmp(role.c_str(), "/") != 0) {
+                    getline(fin, line);
+                    role = line.substr(0, line.find(' '));
+                }
+                getline(fin, line);
+            }
+            if (fin.eof()) break;
+            temp << line << endl;
+        }
+        fin.close();
+        temp.close();
+        remove("roles.txt");
+        rename("temp.txt", "roles.txt");
+        roles.erase(name);
+
     }
     void print() {
         for(const auto& elem : roles){
@@ -315,22 +338,3 @@ private:
     map<string, Being*> characters;
     map<string, map<string, string> > roles;
 };
-
-// class Individual {
-// public:
-//     Individual(Being* being, string name) {
-//         this->being = being;
-//         if (this->being->getType() == "person") {
-//             cout << "What is the name: " << endl;
-//             cin >> this->name;
-//         } else if (this->being->getType() == "creature")
-//         {
-//             this->name = "Creature";
-//         } else {
-//             this->name = "Unknown";
-//         }    
-//     }
-// private:
-//     Being* being;
-//     string name;
-// };

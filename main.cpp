@@ -1,4 +1,4 @@
-#include "charachters.h"
+#include "characters.h"
 #include <map>
 
 int main() {
@@ -28,7 +28,9 @@ int main() {
         }else if (strcmp(input.c_str(), "5") == 0) {
             roles.add_role();
         }else if (strcmp(input.c_str(), "6") == 0) {
-
+            cout << "Type in the role name (capitalized): ";
+            cin >> input;
+            roles.deleteRole(input);
         }
     } while(strcmp(input.c_str(), "q") != 0);
 
