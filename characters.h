@@ -15,8 +15,6 @@ public:
     Being();
     Being(map<std::string, std::string> init, std::string role);
 
-    virtual void print();
-
     virtual void changeVal(std::string attr, int val);
     virtual void changeGender(std::string gender);
     virtual std::string get_string();
@@ -39,7 +37,6 @@ public:
     Person();
     Person(map<std::string, std::string> init, std::string role);
     std::string get_string();
-    void print();
     void changeVal(std::string attr, int val);
     void changeGender(std::string gender);
 protected:
@@ -53,7 +50,6 @@ public:
     Creature();
     Creature(map<std::string, std::string> init, std::string role);
     std::string get_string();
-    void print();
     void changeVal(std::string attr, int val);
 protected:
     int disquiet;
@@ -64,7 +60,6 @@ class EldrichHorror : public Creature{
 public:
     EldrichHorror();
     EldrichHorror(map<std::string, std::string> init, std::string role);
-    void print();
     std::string get_string();
     void changeVal(std::string attr, int val);
 protected:
@@ -85,22 +80,3 @@ private:
     map<std::string, Being*> characters;
     map<std::string, map<std::string, std::string> > roles;
 };
-
-// class Individual {
-// public:
-//     Individual(Being* being, std::string name) {
-//         this->being = being;
-//         if (this->being->getType() == "person") {
-//             cout << "What is the name: " << endl;
-//             cin >> this->name;
-//         } else if (this->being->getType() == "creature")
-//         {
-//             this->name = "Creature";
-//         } else {
-//             this->name = "Unknown";
-//         }    
-//     }
-// private:
-//     Being* being;
-//     std::string name;
-// };

@@ -18,10 +18,6 @@ Being::Being(map<std::string, std::string> init, std::string role) {
     this->role = role;
 }
 
-void Being::print(){
-    cout << "life: " << life << ", " << "str: " << strength << ", " << "int: " << intelligence;
-}
-
 std::string Being::get_string() {
     std::string ret;
     ret += "\tLife: " + to_string(life);
@@ -54,21 +50,19 @@ int Being::get_num(std::string str) {
     lower = stoi(str.substr(0,i));
     return lower + rand() % (upper-lower);
 }
+
 Person::Person() : Being::Being(){
     this->fear = rand() % 10;
     this->gender = "male";
     this->type = "person";
     this->terror = rand() % 4;
 }
+
 Person::Person(map<std::string, std::string> init, std::string role) : Being::Being(init, role) {
     this->fear = rand() % 10;
     this->gender = "male";
     this->type = "person";
     this->terror = rand() % 4;
-};
-void Person::print() {
-    Being::print();
-    cout << ", " << "fear: " << fear << ", " << "gender: " << gender << ", " << "terr: " <<  terror;
 }
 
 std::string Person::get_string() {
@@ -102,10 +96,6 @@ Creature::Creature(map<std::string, std::string> init, std::string role) : Being
     this->type = "creature";
 
 }
-void Creature::print() {
-    Being::print();
-    cout << ", " << "disq: " <<  disquiet << ", " <<  (unnatural ? "unnatural" : "natural");
-}
 
 std::string Creature::get_string() {
     std::string ret = Being::get_string();
@@ -136,12 +126,6 @@ EldrichHorror::EldrichHorror(map<std::string, std::string> init, std::string rol
     this->unnatural = true; // Hard
     this->role = role;
 
-}
-
-void EldrichHorror::print() {
-    Creature::print();
-    cout << ", " << "traumatism: " << traumatism;
-    this->type = "eldritch";
 }
 
 std::string EldrichHorror::get_string() {
@@ -241,8 +225,7 @@ void Roles::add_character(std::string role) {
             characters[name]->changeVal(attr, value);
         }
     }
-    characters[name]->print();
-    cout << endl;
+    cout << name << ":\n" << characters[name]->get_string() << endl;
 }
 void Roles::add_role() {
     fstream fout("roles.txt", ios::app);
