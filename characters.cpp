@@ -236,7 +236,7 @@ void Roles::add_character(std::string role) {
             cout << "Type the lower case attribute (press q to stop, no spaces) ";
             cin >> attr;
             if (strcmp(attr.c_str(), "q") == 0) {break;}
-            cout << "What value do you want to assign (seperated by - if range, available range is 0-10)? ";
+            cout << "What value do you want to assign (single number between 1-10)? ";
             cin >> value;
             characters[name]->changeVal(attr, value);
         }
