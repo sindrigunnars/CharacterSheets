@@ -12,7 +12,6 @@ Being::Being(){
 }
 
 Being::Being(map<std::string, std::string> init, std::string role) {
-    cout << "check" << endl;
     this->life = get_num(init["life"]); // 0-10 Always specified
     this->strength = get_num(init["strength"]); // 0-10 Always specified
     this->intelligence = get_num(init["intelligence"]); // 0-10 Always specified
@@ -42,10 +41,8 @@ int Being::get_num(std::string str) {
     if (strcmp(str.c_str(), "unnatural") == 0) {return 1;}
     else if (strcmp(str.c_str(), "natural") == 0) {return 0;}
     if (str.length() < 3) {
-        cout << "single" << endl;
         return stoi(str);
     }
-    cout << "double" << endl;
     for (i = 0; i < str.length(); i++) {
         if (strcmp(str.substr(i, 1).c_str(), "-") == 0) {break;}
     }
