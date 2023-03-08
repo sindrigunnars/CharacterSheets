@@ -1,25 +1,28 @@
-Ghoul0 Ghoul:
-	Life: 4
-	Strength: 4
-	Intelligence: 2
-	Disquiet: 6
-	Nature: unnatural
-Ghoul1 Ghoul:
-	Life: 4
-	Strength: 4
-	Intelligence: 2
-	Disquiet: 6
-	Nature: unnatural
-Shoggoth0 Shoggoth:
-	Life: 8
-	Strength: 9
-	Intelligence: 6
-	Disquiet: 10
-	Traumatism: 2
-john Professor:
-	Life: 5
-	Strength: 2
+Jane Professor:
+	Life: 6
+	Strength: 5
+	Intelligence: 9
+	Fear: 7
+	Terror: 1
+	Gender: female
+John Professor:
+	Life: 6
+	Strength: 3
 	Intelligence: 8
-	Fear: 5
-	Terror: 2
+	Fear: 3
+	Terror: 3
 	Gender: male
+hah Nurse:
+	Life: 6
+	Strength: 7
+	Intelligence: 9
+	Fear: 2
+	Terror: 1
+	Gender: haha
+jsjs Nurse:
+	Life: 7
+	Strength: 5
+	Intelligence: 7
+	Fear: 6
+	Terror: 0
+	Gender: jsjs
