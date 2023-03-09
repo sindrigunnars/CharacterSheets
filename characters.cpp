@@ -16,6 +16,11 @@ Being::Being(map<std::string, std::string> init, std::string role) {
     this->strength = get_num(init["strength"]); // 0-10 Always specified
     this->intelligence = get_num(init["intelligence"]); // 0-10 Always specified
     this->role = role;
+    this->is_investigator = false;
+}
+
+void Being::make_investigator() {
+    this->is_investigator = true;
 }
 
 std::string Being::get_string() {
@@ -70,6 +75,8 @@ std::string Person::get_string() {
     ret += "\n\tFear: " + to_string(fear);
     ret += "\n\tTerror: " + to_string(terror);
     ret += "\n\tGender: " + gender;
+    std::string genderstr = is_investigator ? "Yes" : "No";
+    ret += "\n\tIs investigator: " + genderstr;
     return ret;
 }
 
@@ -79,6 +86,7 @@ void Person::changeVal(std::string attr, int val){
     if (strcmp(attr.c_str(), "intelligence") == 0) this->intelligence = val;
     if (strcmp(attr.c_str(), "terror") == 0) this->terror = val;
     if (strcmp(attr.c_str(), "fear") == 0) this->fear = val;
+    if (strcmp(attr.c_str(), "investigator") == 0) this->is_investigator = val;
 }
 
 void Person::changeGender(std::string gender) {

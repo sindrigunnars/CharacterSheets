@@ -28,7 +28,7 @@ int main() {
             cin >> input;
             roles.deleteRole(input);
         }else if (strcmp(input.c_str(), "5") == 0) {
-            cout << "What role does this character have? ";
+            cout << "What role does this character have (Case sensitive)? ";
             cin >> input;
             roles.add_character(input);
         }else if (strcmp(input.c_str(), "6") == 0) {

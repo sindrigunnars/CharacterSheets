@@ -20,7 +20,7 @@ public:
 
     std::string getType();
     std::string getRole();
-
+    void make_investigator();
     int get_num(std::string str);
 
 protected:
@@ -29,6 +29,7 @@ protected:
     int intelligence;
     std::string type;
     std::string role;
+    bool is_investigator;
 };
 
 class Person : public Being{

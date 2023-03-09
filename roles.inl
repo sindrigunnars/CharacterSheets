@@ -44,68 +44,77 @@ public:
         std::string name, attr;
         Choice choice;
         int count;
-        if (strcmp(roles[role]["type"].c_str(), "Person") == 0) {choice = person;}
-        if (strcmp(roles[role]["type"].c_str(), "Creature") == 0) {choice = creature;}
-        if (strcmp(roles[role]["type"].c_str(), "Eldritch") == 0) {choice = eldrich;}
-        switch (choice) {
-            case person:
-                cout << "What is this persons name (No spaces)? ";
-                cin >> name;
-                characters[name] = new Person(roles[role], role);
-                cout << "What is this persons gender? ";
-                cin >> attr;
-                characters[name]->changeGender(attr);
-                break;
-            case creature:
-                count = 0;
-                for (const auto& elem : characters) {
-                    if (strcmp(elem.second->getRole().c_str(), role.c_str()) == 0) count++;
+        for (const auto& elem : roles) {
+            if (strcmp(elem.first.c_str(), role.c_str()) == 0) {
+                if (strcmp(roles[role]["type"].c_str(), "Person") == 0) {choice = person;}
+                if (strcmp(roles[role]["type"].c_str(), "Creature") == 0) {choice = creature;}
+                if (strcmp(roles[role]["type"].c_str(), "Eldritch") == 0) {choice = eldrich;}
+                switch (choice) {
+                    case person:
+                        cout << "What is this persons name (No spaces)? ";
+                        cin >> name;
+                        characters[name] = new Person(roles[role], role);
+                        cout << "What is this persons gender? ";
+                        cin >> attr;
+                        characters[name]->changeGender(attr);
+                        cout << "Is this person an investigator (y/n)? ";
+                        cin >> attr;
+                        if (strcmp(attr.c_str(), "y") == 0) {characters[name]->make_investigator();}
+                        break;
+                    case creature:
+                        count = 1;
+                        for (const auto& elem : characters) {
+                            if (strcmp(elem.second->getRole().c_str(), role.c_str()) == 0) count++;
+                        }
+                        name += role + to_string(count);
+                        characters[name] = new Creature(roles[role], role);
+                        cout << "Do you want to edit the name (y/n)? ";
+                        cin >> attr;
+                        if (strcmp(attr.c_str(), "y") == 0) {
+                            characters.erase(name);
+                            cout << "Please enter new name (No spaces): ";
+                            cin >> name;
+                            characters.erase(name);
+                            characters[name] = new Creature(roles[role], role);
+                        }
+                        break;
+                    case eldrich:
+                        count = 1;
+                        for (const auto& elem : characters) {
+                            if (strcmp(elem.second->getRole().c_str(), role.c_str()) == 0) count++;
+                        }
+                        name += role + to_string(count);
+                        characters[name] = new EldrichHorror(roles[role], role);
+                        cout << "Do you want to edit the name (y/n)? ";
+                        cin >> attr;
+                        if (strcmp(attr.c_str(), "y") == 0) {
+                            characters.erase(name);
+                            cout << "Please enter new name (No spaces): ";
+                            cin >> name;
+                            characters.erase(name);
+                            characters[name] = new EldrichHorror(roles[role], role);
+                        }
+                        break;
                 }
-                name += role + to_string(count);
-                characters[name] = new Creature(roles[role], role);
-                cout << "Do you want to edit the name (y/n)? ";
+                cout << name << ":\n" << characters[name]->get_string() << endl;
+                cout << "Do you want to edit any attributes (y/n)? ";
                 cin >> attr;
                 if (strcmp(attr.c_str(), "y") == 0) {
-                    characters.erase(name);
-                    cout << "Please enter new name (No spaces): ";
-                    cin >> name;
-                    characters.erase(name);
-                    characters[name] = new Creature(roles[role], role);
+                    int value;
+                    while (true) {
+                        cout << name << ": \n" << characters[name]->get_string() << endl;
+                        cout << "Type the lower case attribute (press q to stop, no spaces) ";
+                        cin >> attr;
+                        if (strcmp(attr.c_str(), "q") == 0) {break;}
+                        cout << "What value do you want to assign (single number between 1-10)? ";
+                        cin >> value;
+                        characters[name]->changeVal(attr, value);
+                    }
                 }
+                cout << name << ":\n" << characters[name]->get_string() << endl;
                 break;
-            case eldrich:
-                count = 0;
-                for (const auto& elem : characters) {
-                    if (strcmp(elem.second->getRole().c_str(), role.c_str()) == 0) count++;
-                }
-                name += role + to_string(count);
-                characters[name] = new EldrichHorror(roles[role], role);
-                cout << "Do you want to edit the name (y/n)? ";
-                cin >> attr;
-                if (strcmp(attr.c_str(), "y") == 0) {
-                    characters.erase(name);
-                    cout << "Please enter new name (No spaces): ";
-                    cin >> name;
-                    characters.erase(name);
-                    characters[name] = new EldrichHorror(roles[role], role);
-                }
-                break;
-        }
-        cout << "Do you want to edit any attributes (y/n)? ";
-        cin >> attr;
-        if (strcmp(attr.c_str(), "y") == 0) {
-            int value;
-            while (true) {
-                cout << name << ": \n" << characters[name]->get_string() << endl;
-                cout << "Type the lower case attribute (press q to stop, no spaces) ";
-                cin >> attr;
-                if (strcmp(attr.c_str(), "q") == 0) {break;}
-                cout << "What value do you want to assign (single number between 1-10)? ";
-                cin >> value;
-                characters[name]->changeVal(attr, value);
             }
         }
-        cout << name << ":\n" << characters[name]->get_string() << endl;
     }
 
     void add_role() {
@@ -139,15 +148,21 @@ public:
             cin >> value;
             new_role["disquiet"] = value;
             write += "\ndisquiet " + value;
+            roles[name] = new_role;
+            fout << write << "\n/\n";
         }
         if (strcmp(type.c_str(), "Eldritch") == 0) {
             cout << "What is the traumatism value (seperated by - if range, available range is 0-10)? ";
             cin >> value;
             new_role["traumatism"] = value;
-            write += "\traumatism " + value;
+            write += "\ntraumatism " + value;
+            roles[name] = new_role;
+            fout << write << "\n/\n";
         }
-        roles[name] = new_role;
-        fout << write << "\n/\n";
+        if (strcmp(type.c_str(), "Person") == 0) {
+            roles[name] = new_role;
+            fout << write << "\n/\n";
+        }
     }
 
     void print() {
