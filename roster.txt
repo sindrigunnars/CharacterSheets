@@ -1,13 +1,7 @@
 Chthonian1 Chthonian:
 	Life: 8
 	Strength: 7
-	Intelligence: 2
-	Disquiet: 10
-	Traumatism: 1
-Chthonian2 Chthonian:
-	Life: 8
-	Strength: 7
-	Intelligence: 2
+	Intelligence: 10
 	Disquiet: 10
 	Traumatism: 1
 Ghoul1 Ghoul:
@@ -16,30 +10,41 @@ Ghoul1 Ghoul:
 	Intelligence: 2
 	Disquiet: 6
 	Nature: unnatural
-Hanna Reporter:
-	Life: 6
-	Strength: 2
-	Intelligence: 8
-	Fear: 3
-	Terror: 1
-	Gender: female
-	Is investigator: Yes
-Jack Nurse:
-	Life: 6
-	Strength: 5
-	Intelligence: 8
-	Fear: 9
-	Terror: 0
-	Gender: male
-	Is investigator: Yes
-Jane Professor:
-	Life: 6
+Ghoul2 Ghoul:
+	Life: 4
 	Strength: 4
+	Intelligence: 2
+	Disquiet: 6
+	Nature: unnatural
+Ghoul3 Ghoul:
+	Life: 4
+	Strength: 4
+	Intelligence: 10
+	Disquiet: 6
+	Nature: unnatural
+Hanna Professor:
+	Life: 4
+	Strength: 1
 	Intelligence: 9
-	Fear: 6
+	Fear: 4
 	Terror: 2
 	Gender: female
+	Is investigator: Yes
+Jane Nurse:
+	Life: 10
+	Strength: 3
+	Intelligence: 7
+	Fear: 9
+	Gender: female
 	Is investigator: No
+John Reporter:
+	Life: 6
+	Strength: 4
+	Intelligence: 6
+	Fear: 7
+	Terror: 10
+	Gender: male
+	Is investigator: Yes
 Shoggoth1 Shoggoth:
 	Life: 8
 	Strength: 9

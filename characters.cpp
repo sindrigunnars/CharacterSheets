@@ -73,10 +73,10 @@ Person::Person(map<std::string, std::string> init, std::string role) : Being::Be
 std::string Person::get_string() {
     std::string ret = Being::get_string();
     ret += "\n\tFear: " + to_string(fear);
-    ret += "\n\tTerror: " + to_string(terror);
+    if (is_investigator) ret += "\n\tTerror: " + to_string(terror);
     ret += "\n\tGender: " + gender;
-    std::string genderstr = is_investigator ? "Yes" : "No";
-    ret += "\n\tIs investigator: " + genderstr;
+    std::string invstr = is_investigator ? "Yes" : "No";
+    ret += "\n\tIs investigator: " + invstr;
     return ret;
 }
 

@@ -15,7 +15,6 @@ class Roles {
 public:
     Roles() {
         fstream fin("roles.txt");
-        Choice choice;
         std::string primary, secondary, role, type;
 
         fin >> role >> type;
@@ -96,23 +95,31 @@ public:
                         }
                         break;
                 }
-                cout << name << ":\n" << characters[name]->get_string() << endl;
                 cout << "Do you want to edit any attributes (y/n)? ";
                 cin >> attr;
                 if (strcmp(attr.c_str(), "y") == 0) {
-                    int value;
-                    while (true) {
-                        cout << name << ": \n" << characters[name]->get_string() << endl;
-                        cout << "Type the lower case attribute (press q to stop, no spaces) ";
-                        cin >> attr;
-                        if (strcmp(attr.c_str(), "q") == 0) {break;}
-                        cout << "What value do you want to assign (single number between 1-10)? ";
-                        cin >> value;
-                        characters[name]->changeVal(attr, value);
-                    }
+                    change_attribute(name);
                 }
                 cout << name << ":\n" << characters[name]->get_string() << endl;
                 break;
+            }
+        }
+    }
+
+    void change_attribute(std::string name) {
+        for (const auto& elem : characters) {
+            if (strcmp(elem.first.c_str(), name.c_str()) == 0) {
+                int value;
+                std::string attr;
+                while (true) {
+                    cout << name << ": \n" << characters[name]->get_string() << endl;
+                    cout << "Type the lower case attribute (press q to stop, no spaces) ";
+                    cin >> attr;
+                    if (strcmp(attr.c_str(), "q") == 0) {break;}
+                    cout << "What value do you want to assign (single number between 1-10)? ";
+                    cin >> value;
+                    characters[name]->changeVal(attr, value);
+                }
             }
         }
     }

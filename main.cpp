@@ -9,7 +9,7 @@ int main() {
     string input = "";
     cout << "Welcome!! ";
     do {
-        cout << "What would you like to do?\n\tPress 1: See roles\n\tPress 2: See specific role\n\tPress 3: Add role \n\tPress 4: Remove role \n\tPress 5: Add to roster \n\tPress 6: Print roster \n\tPress q: Quit \n\tChoice: ";
+        cout << "What would you like to do?\n\tPress 1: See roles\n\tPress 2: See specific role\n\tPress 3: Add role \n\tPress 4: Remove role \n\tPress 5: Add to roster \n\tPress 6: Change character attribute \n\tPress 7: Print roster \n\tPress q: Quit \n\tChoice: ";
         cin >> input;
         if (strcmp(input.c_str(), "1") == 0) {
             cout << "Roles:" << endl;
@@ -32,6 +32,10 @@ int main() {
             cin >> input;
             roles.add_character(input);
         }else if (strcmp(input.c_str(), "6") == 0) {
+            cout << "What is the characters name (case sensitive)? ";
+            cin >> input;
+            roles.change_attribute(input);
+        }else if (strcmp(input.c_str(), "7") == 0) {
             cout << "1. Print to screen\n2. Print to file ";
             cin >> input;
             if (strcmp(input.c_str(), "1") == 0) {
